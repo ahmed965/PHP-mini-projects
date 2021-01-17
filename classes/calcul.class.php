@@ -12,7 +12,7 @@ public function __construct(string $operator, int $num1, int $num2) {
 	$this->num1 = $num1;
 	$this->num2 = $num2;
 }
-public function calculator(){
+public function calculator() {
 switch ($this->operator) {
 
 	case 'add':
@@ -38,7 +38,7 @@ switch ($this->operator) {
 	default:
 		echo "EROOR!";
 		break;
-}
-}
+		}
+	}
 }
 ?>
