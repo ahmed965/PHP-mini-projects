@@ -1,11 +1,4 @@
-# calcul_OOP
-simple calcul OOP PHP
-simple exercice of Object-oriented programming (OOP) in PHP
-you can calculate two numbers
-Author: Ahmed Bouzguenda
+# PHP mini projects
 
-Instructions 
-
-1. enter two numbers.
-2. choose the operator
-3. click calculate
+1. calcul-numbers
+2. filter-player-positions

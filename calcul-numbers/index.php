@@ -4,7 +4,7 @@ include'classes/calcul.class.php';
 <!DOCTYPE html>
 <html>
 	<head>
-		<title></title>
+		<title>Calcul numbers</title>
 	</head>
 	<body>
 		<form action="calcul.php" method="post">
