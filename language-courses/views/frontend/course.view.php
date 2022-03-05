@@ -57,6 +57,6 @@
 </div>
 <?php
   $content = ob_get_clean();
-  $title ="Courses";
+  $title ="Comments";
   require_once  './views/frontend/commons/template.php';
   ?>
