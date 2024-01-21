@@ -20,20 +20,23 @@ class RequestValidation
   private function validateNumberOfTimesPerWeek(int $numberOfTimesPerWeek): void
   {
     if (!preg_match('/\d{1}/', $numberOfTimesPerWeek)) {
-      throw new Exception(self::TIMES_PER_WEEK . 'is invalid', 400);
+      http_response_code(400);
+      throw new Exception(self::TIMES_PER_WEEK . 'is invalid');
     }
   }
   private function validateString(string $string): void
   {
-    if (!preg_match('/^[a-zA-Z]+$/', $string) || strlen($string) < 3) {
-      throw new Exception($string . 'is invalid', 400);
+    if (!preg_match('/^[a-zA-Z\s]+$/', $string) || strlen($string) < 3) {
+      http_response_code(400);
+      throw new Exception($string . 'is invalid');
     }
   }
 
   private function validateDate(string $date): void
   {
     if (!preg_match('/\d{4}-\d{2}-\d{2}/', $date)) {
-      throw new Exception('date is invalid', 400);
+      http_response_code(400);
+      throw new Exception('date is invalid');
     }
   }
 }

@@ -2,6 +2,7 @@
 
 class TrainingPlanService
 {
+  private const ID = 'id';
   public function __construct(private string $file)
   {
   }
@@ -10,11 +11,22 @@ class TrainingPlanService
   {
     $trainingPlanArray = $this->getFileDataAsArray();
     $requestDataArray = array_merge(
-      ['id' => $this->incrementId($trainingPlanArray)],
+      [self::ID => $this->incrementId($trainingPlanArray)],
       $requestDataArray
     );
     $trainingPlanArray[] = $requestDataArray;
-    $this->addPlanInJsonFile($trainingPlanArray);
+    $this->addTrainingPlanInJsonFile($trainingPlanArray);
+  }
+
+  public function findByIdOrFail(int $id): array
+  {
+    foreach ($this->getFileDataAsArray() as $trainingPlanArray) {
+      if ($trainingPlanArray[self::ID] === $id) {
+        return $trainingPlanArray;
+      }
+    }
+    http_response_code(404);
+    throw new Exception('training plan with id ' . $id . ' is not found');
   }
 
   public function getFileDataAsArray(): array
@@ -23,10 +35,10 @@ class TrainingPlanService
   }
   private function incrementId(array $trainingPlanArray): int
   {
-    return end($trainingPlanArray)['id'] + 1;
+    return end($trainingPlanArray)[self::ID] + 1;
   }
 
-  private function addPlanInJsonFile(array $trainingPlanArray): void
+  private function addTrainingPlanInJsonFile(array $trainingPlanArray): void
   {
     file_put_contents($this->file, json_encode($trainingPlanArray));
   }

@@ -1,4 +1,4 @@
 [
-  { "id": 1, "times-pro-week": 4, "level": "advanced", "goal": "Muscle build-up", "started-at": "2023-01-01", "finished-at": "2023-04-01" },
-  { "id": 2, "times-pro-week": 3, "level": "beginner", "goal": "gain weight", "started-at": "2023-01-01", "finished-at": "2023-04-01" }
+  { "id": 1, "times-per-week": 4, "level": "advanced", "goal": "Muscle build up", "started-at": "2023-01-01", "finished-at": "2023-04-01" },
+  { "id": 2, "times-per-week": 3, "level": "beginner", "goal": "gain weight", "started-at": "2023-01-01", "finished-at": "2023-04-01" }
 ]
