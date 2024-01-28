@@ -3,24 +3,29 @@
 class TrainingPlanService
 {
   private const ID = 'id';
-  public function __construct(private string $file)
+
+  public function __construct(private string $file, private array $jsonDataToArray)
   {
+  }
+
+  public function getJsonDataToArray(): array
+  {
+    return $this->jsonDataToArray;
   }
 
   public function addTrainingPlan(array $requestDataArray): void
   {
-    $trainingPlanArray = $this->getFileDataAsArray();
     $requestDataArray = array_merge(
-      [self::ID => $this->incrementId($trainingPlanArray)],
+      [self::ID => $this->incrementId($this->jsonDataToArray)],
       $requestDataArray
     );
-    $trainingPlanArray[] = $requestDataArray;
-    $this->addTrainingPlanInJsonFile($trainingPlanArray);
+    $this->jsonDataToArray[] = $requestDataArray;
+    $this->saveTrainingPlansInJson($this->jsonDataToArray);
   }
 
   public function findByIdOrFail(int $id): array
   {
-    foreach ($this->getFileDataAsArray() as $trainingPlanArray) {
+    foreach ($this->jsonDataToArray as $trainingPlanArray) {
       if ($trainingPlanArray[self::ID] === $id) {
         return $trainingPlanArray;
       }
@@ -29,17 +34,38 @@ class TrainingPlanService
     throw new Exception('training plan with id ' . $id . ' is not found');
   }
 
-  public function getFileDataAsArray(): array
-  {
-    return json_decode(file_get_contents($this->file), true);
-  }
   private function incrementId(array $trainingPlanArray): int
   {
     return end($trainingPlanArray)[self::ID] + 1;
   }
 
-  private function addTrainingPlanInJsonFile(array $trainingPlanArray): void
+  private function saveTrainingPlansInJson(array $trainingPlanArray): void
   {
     file_put_contents($this->file, json_encode($trainingPlanArray));
+  }
+
+  public function updateTrainigPlan(int $id, array $requestDataArray): void
+  {
+    $this->findByIdOrFail($id);
+    foreach ($this->jsonDataToArray as &$trainingPlanArray) {
+      if ($trainingPlanArray[self::ID] === $id) {
+        foreach ($trainingPlanArray as $key => $value) {
+          if ($key === self::ID) {
+            continue;
+          }
+          if ($trainingPlanArray[$key] !== $requestDataArray[$key]) {
+            $trainingPlanArray[$key] = $requestDataArray[$key];
+          }
+        }
+      }
+    }
+
+    $this->saveTrainingPlansInJson($this->jsonDataToArray);
+  }
+  public function deleteTrainingPlan(int $id): void
+  {
+    $this->findByIdOrFail($id);
+    array_splice($this->jsonDataToArray, $id - 1, 1);
+    $this->saveTrainingPlansInJson($this->jsonDataToArray);
   }
 }

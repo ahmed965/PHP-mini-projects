@@ -3,8 +3,12 @@ require_once('./Controllers/TrainingPlanController.php');
 require_once('./Services/TrainingPlanService.php');
 require_once('./RequestValidation/RequestValidation.php');
 
+$jsonFile = 'Data/data.json';
 $trainingPlan = new TrainingPlanController(
-  new TrainingPlanService('Data/data.json'),
+  new TrainingPlanService(
+    $jsonFile,
+    json_decode(file_get_contents($jsonFile), true)
+  ),
   new RequestValidation(),
   (array) json_decode(file_get_contents("php://input"), true)
 );
@@ -17,6 +21,10 @@ if ($method === 'GET') {
   } else {
     $trainingPlan->index();
   }
-} elseif ($method = 'POST') {
+} elseif ($method === 'POST') {
   $trainingPlan->store();
+} elseif ($method === 'PUT') {
+  $trainingPlan->update($id);
+} elseif ($method === 'DELETE') {
+  $trainingPlan->destroy($id);
 }
