@@ -1,4 +1,5 @@
 <?php
+
 class TrainingPlanController
 {
   private const MESSGE = 'message';
