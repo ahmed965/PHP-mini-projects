@@ -1,0 +1,29 @@
+{
+  "customer": {
+    "name": "Ahmed Bouzguenda",
+    "email": "ahmed@Bouzguenda.com",
+    "address": "test aderss",
+    "phone_number": "1234567"
+  },
+  "purcahse": {
+    "purchase_date": "2024-11-16",
+    "subtotal": 110.0,
+    "tax": 10.0,
+    "total_amount": 120.0,
+    "status": "Paid"
+  },
+  "purchase_elements": [
+    {
+      "product_name": "Laptop",
+      "quantity": 1,
+      "unit_price": 100.0,
+      "total": 100.0
+    },
+    {
+      "product_name": "Mouse",
+      "quantity": 1,
+      "unit_price": 10.0,
+      "total": 10.0
+    }
+  ]
+}
