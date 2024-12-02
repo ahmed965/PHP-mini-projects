@@ -5,12 +5,25 @@ use DateTime;
 
 class PurchaseDTO
 {
+    private int $customerId;
     private DateTime $purchaseDate;
     private float $subtotal;
     private float $tax;
     private float $totalAmount;
     private string $paymentMethod;
     private string $status;
+
+    public function getCutomerId(): int
+    {
+        return $this->customerId;
+    }
+
+    public function setCutomerId($customerId): PurchaseDTO
+    {
+        $this->customerId = $customerId;
+
+        return $this;
+    }
 
     public function getPurchaseDate(): DateTime
     {

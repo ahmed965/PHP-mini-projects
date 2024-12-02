@@ -15,7 +15,7 @@ class CustomerModel
     public function saveCustomer(CustomerDto $customer): ?int
     {
         try {
-            $stmt = $this->pdo->prepare("INSERT INTO Customer (name, email, address, phone_number) VALUES (:name, :email, :address, :phone)");
+            $stmt = $this->pdo->prepare('INSERT INTO Customer (name, email, address, phone_number) VALUES (:name, :email, :address, :phone)');
             $stmt->execute([
                 ':name' => $customer->getName(),
                 ':email' => $customer->getEmail(),
@@ -24,6 +24,7 @@ class CustomerModel
             ]);
             return $this->pdo->lastInsertId();
         } catch (\PDOException $e) {
+            echo $e->getMessage();
             return null;
         }
     }

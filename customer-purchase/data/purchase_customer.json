@@ -2,14 +2,15 @@
   "customer": {
     "name": "Ahmed Bouzguenda",
     "email": "ahmed@Bouzguenda.com",
-    "address": "test aderss",
+    "address": "test adress",
     "phone_number": "1234567"
   },
-  "purcahse": {
+  "purchase": {
     "purchase_date": "2024-11-16",
     "subtotal": 110.0,
     "tax": 10.0,
     "total_amount": 120.0,
+    "payment_method": "Paypal",
     "status": "Paid"
   },
   "purchase_elements": [
