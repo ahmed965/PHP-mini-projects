@@ -9,7 +9,8 @@ class PurchaseController
 {
     public function __construct(
         private PurchaseService $purchaseService,
-        private array $purchaseData) {
+        private array $purchaseData
+    ) {
     }
 
     public function savePurchases(): void
@@ -26,7 +27,7 @@ class PurchaseController
         } catch (Exception $e) {
             $this->toJson(
                 [
-                    'success' => true,
+                    'success' => false,
                     'message' => $e->getMessage(),
                 ],
                 400
@@ -36,7 +37,6 @@ class PurchaseController
 
     private function toJson(array $data, int $statusCode): void
     {
-        header('Content-Type: application/json');
         http_response_code($statusCode);
         echo json_encode($data);
     }

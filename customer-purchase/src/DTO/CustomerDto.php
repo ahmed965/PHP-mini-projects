@@ -16,7 +16,6 @@ class CustomerDto
 
     public function setId(int $id): CustomerDto
     {
-
         $this->id = $id;
 
         return $this;

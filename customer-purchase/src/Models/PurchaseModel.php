@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\DTO\PurchaseDto;
+use App\Exceptions\PurchaseException;
 use PDO;
+use PDOException;
 
 class PurchaseModel
 {
@@ -11,7 +13,7 @@ class PurchaseModel
     {
     }
 
-    public function savePurchase(PurchaseDto $purchaseDto): ?int
+    public function savePurchase(PurchaseDto $purchaseDto): int
     {
         try {
             $stmt = $this->pdo->prepare('INSERT INTO purchase (customer_id, purchase_date, subtotal, tax, total_amount, payment_method, status)
@@ -28,9 +30,9 @@ class PurchaseModel
             ]);
 
             return $this->pdo->lastInsertId();
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             echo $e->getMessage();
-            return null;
+            throw new PurchaseException('can\'t save purchase');
         }
     }
 }

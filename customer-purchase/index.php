@@ -4,6 +4,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 use App\Controllers\PurchaseController;
 use App\Database\DatabaseConnection;
 use App\Models\CustomerModel;
+use App\Models\PurchaseElementModel;
 use App\Models\PurchaseModel;
 use App\Services\PurchaseService;
 
@@ -12,10 +13,17 @@ $purchaseCustomerData = json_decode(
     true
 );
 
-$customerModel = new CustomerModel(DatabaseConnection::getInstance());
-$purchaseModel = new PurchaseModel(DatabaseConnection::getInstance());
+$databaseConnection = DatabaseConnection::getInstance();
+$customerModel = new CustomerModel($databaseConnection);
+$purchaseModel = new PurchaseModel($databaseConnection);
+$purchaseElementModel = new PurchaseElementModel($databaseConnection);
 $purchaseController = new PurchaseController(
-    new PurchaseService($customerModel, $purchaseModel),
+    new PurchaseService(
+        $customerModel,
+        $purchaseModel,
+        $purchaseElementModel,
+        $databaseConnection
+    ),
     $purchaseCustomerData);
 
 $purchaseController->savePurchases();
