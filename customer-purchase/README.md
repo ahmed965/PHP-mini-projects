@@ -56,8 +56,7 @@ This is a PHP app that handles customer purchases. It reads a JSON payload from 
 { "success": true, "message": "purchase and customer are saved" }
 ```
 
-- If there is a validation error or an unexpected issue during processing for example the following response will be
-- returned in the terminal:
+- If there is a validation error or an unexpected issue during processing (database error)for example the following response will be returned in the terminal:
 
 ```json
 { "success": false, "message": "Customer name is required." }
