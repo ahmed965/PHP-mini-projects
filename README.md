@@ -5,3 +5,4 @@
 3. travel-agency
 4. goals
 5. training-plan (rest api application)
+6. customer-purchase

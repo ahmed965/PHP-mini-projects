@@ -31,7 +31,7 @@ class PurchaseModel
 
             return $this->pdo->lastInsertId();
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            echo $e->getMessage() . PHP_EOL;
             throw new PurchaseException('can\'t save purchase');
         }
     }

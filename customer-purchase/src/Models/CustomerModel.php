@@ -16,7 +16,7 @@ class CustomerModel
     public function saveCustomer(CustomerDto $customer): int
     {
         try {
-            $stmt = $this->pdo->prepare('INSERT INTO customer (name, email, address, phone_number) VALUES (:name, :email, :address, :phone');
+            $stmt = $this->pdo->prepare('INSERT INTO customer (name, email, address, phone_number) VALUES (:name, :email, :address, :phone)');
             $stmt->execute([
                 ':name' => $customer->getName(),
                 ':email' => $customer->getEmail(),

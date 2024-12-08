@@ -1,6 +1,6 @@
 {
   "customer": {
-    "name": "Ahmed Bouzguenda",
+    "name": "",
     "email": "ahmed@Bouzguenda.com",
     "address": "test adress",
     "phone_number": "1234567"
@@ -15,8 +15,8 @@
   },
   "purchase_elements": [
     {
-      "product_name": "",
-      "quantity": "",
+      "product_name": "Laptop",
+      "quantity": 1,
       "unit_price": 100.0,
       "total": 100.0
     },
