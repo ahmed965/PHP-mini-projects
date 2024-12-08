@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Services\PayloadValidationService;
 use App\Services\PurchaseService;
 use Exception;
 
@@ -9,6 +10,7 @@ class PurchaseController
 {
     public function __construct(
         private PurchaseService $purchaseService,
+        private PayloadValidationService $payloadValidationService,
         private array $purchaseData
     ) {
     }
@@ -16,6 +18,16 @@ class PurchaseController
     public function savePurchases(): void
     {
         try {
+            $payloadValidationErrors = $this->payloadValidationService->validatePurchasePayload($this->purchaseData);
+            if (!empty($payloadValidationErrors)) {
+                $this->toJson(
+                    [
+                        'success' => false,
+                        'message' => implode(', ', $payloadValidationErrors),
+                    ],
+                    400
+                );
+            }
             $this->purchaseService->processPurchase($this->purchaseData);
             $this->toJson(
                 [
@@ -39,5 +51,6 @@ class PurchaseController
     {
         http_response_code($statusCode);
         echo json_encode($data);
+        exit;
     }
 }

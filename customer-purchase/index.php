@@ -6,6 +6,7 @@ use App\Database\DatabaseConnection;
 use App\Models\CustomerModel;
 use App\Models\PurchaseElementModel;
 use App\Models\PurchaseModel;
+use App\Services\PayloadValidationService;
 use App\Services\PurchaseService;
 
 $purchaseCustomerData = json_decode(
@@ -24,6 +25,8 @@ $purchaseController = new PurchaseController(
         $purchaseElementModel,
         $databaseConnection
     ),
-    $purchaseCustomerData);
+    new PayloadValidationService,
+    $purchaseCustomerData
+);
 
 $purchaseController->savePurchases();
